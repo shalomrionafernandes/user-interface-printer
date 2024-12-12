@@ -267,6 +267,24 @@ document.addEventListener("DOMContentLoaded", function () {
   loadHTML("./header.html", "header-placeholder");
   loadHTML("./footer.html", "footer-placeholder");
 });
+// Load header and footer
+document.addEventListener("DOMContentLoaded", function () {
+  function loadHTML(file, elementId) {
+    return fetch(file) // Return the Promise from fetch
+      .then((response) => {
+        if (!response.ok) throw new Error("Error loading file: " + file);
+        return response.text();
+      })
+      .then((data) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.innerHTML = data;
+        } else {
+          throw new Error("Element with ID '" + elementId + "' not found.");
+        }
+      });
+  }
+});
 
 // // Hide the loader when the page is fully loaded
 window.addEventListener("load", function () {
