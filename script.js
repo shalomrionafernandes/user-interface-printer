@@ -1,121 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const playlistItems = document.querySelectorAll("#playlist li");
-  const progressBars = document.querySelectorAll(".progress-bar");
-  const audioPlayer = document.getElementById("audio-player");
   const themeToggle = document.getElementById("theme-toggle");
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
   const menu = document.getElementById("menu");
-  const bookList = document.getElementById("audio-books-list");
-  const favBooksList = document.getElementById("fav-audio-books-list");
-  const template = document.getElementById("book-card-template");
-  const favouriteButton = document.getElementById("favourite-btn");
   const commentForm = document.getElementById("comment-form");
-  const FAV_BOOKS_KEY = "fav_books";
-  const currentBookId = "7";
-  let allBooksList = [];
-  let currentBook;
-  // Audio Player Controls Buttons
-  const ctrlPlay = document.getElementById("ctrl-play");
-  const ctrlFastBackward = document.getElementById("fast-backward");
-  const ctrlFastForward = document.getElementById("fast-forward");
-  const volumeUp = document.getElementById("volume-up");
-  const volumeDown = document.getElementById("volume-down");
-
-  const seekSlider = document.getElementById("seekSlider");
-  const currentTimeLabel = document.getElementById("currentTime");
-  const durationLabel = document.getElementById("duration");
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const audioFile = urlParams.get("file");
-  const startTime = urlParams.get("t");
-
-  if (audioFile && startTime) {
-    audioPlayer.src = `audio/${audioFile}`;
-    audioPlayer.currentTime = startTime;
-    audioPlayer.play();
-  }
-
-  const shareBtn = document.getElementById("share-link");
-  if (shareBtn) {
-    shareBtn.addEventListener("click", () => {
-      const currentAudioFile = audioPlayer.src.split("/").pop();
-      const currentTime = audioPlayer.currentTime;
-
-      const currentUrl = `${
-        window.location.href
-      }?file=${currentAudioFile}&t=${Math.floor(currentTime)}`;
-      const shareText = `Check out this audio "${currentAudioFile}" starting at ${Math.floor(
-        currentTime
-      )} seconds!`;
-
-      navigator.clipboard
-        .writeText(currentUrl)
-        .then(() => {
-          alert(`Link copied to clipboard`);
-        })
-        .catch((err) => {
-          console.error("Failed to copy: ", err);
-        });
-    });
-  }
-
-  // function to speed audio
-  const speedButton = document.getElementById("speedButton");
-  const speedDropdown = document.getElementById("speedDropdown");
-  const audio = document.getElementById("audio");
-
-  // Check if speedButton exists before adding the event listener
-  if (speedButton) {
-    speedButton.addEventListener("click", () => {
-      speedDropdown.classList.toggle("hidden");
-    });
-  } else {
-  }
-
-  // Check if speedDropdown exists before working with its list items
-  if (speedDropdown) {
-    const speedItems = speedDropdown.querySelectorAll("li");
-
-    speedItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const selectedSpeed = parseFloat(item.getAttribute("data-speed")); // Convert to float
-
-        // Assuming 'audio' element exists, otherwise you need to check that too
-        if (audio) {
-          audio.playbackRate = selectedSpeed;
-        }
-
-        if (speedButton) {
-          speedButton.textContent = selectedSpeed + "x";
-        }
-
-        speedDropdown.classList.add("hidden");
-      });
-    });
-  } else {
-  }
-  // Check if audioPlayer exists
-  if (audioPlayer) {
-    audioPlayer.addEventListener("canplay", () => {
-      // Check if speedDropdown exists and has li elements
-      if (speedDropdown && speedDropdown.querySelectorAll("li").length > 0) {
-        speedDropdown.querySelectorAll("li").forEach((item) => {
-          item.addEventListener("click", () => {
-            const selectedSpeed = parseFloat(item.getAttribute("data-speed"));
-            audioPlayer.playbackRate = selectedSpeed;
-            speedButton.textContent = selectedSpeed + "x";
-
-            speedDropdown.classList.add("hidden");
-          });
-        });
-      } else {
-        console.warn("Speed dropdown or its items do not exist.");
-      }
-    });
-  } else {
-    console.warn("Audio player does not exist.");
-  }
 
   // Function to display error popup
   function showErrorPopup(message) {
@@ -158,105 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function loadFavourites() {
-    const favs = localStorage.getItem(FAV_BOOKS_KEY);
-
-    var favsList = JSON.parse(favs);
-    favBooksList.innerHTML = "";
-
-    if (favs == null || favsList.length == 0) {
-      document
-        .getElementById("fav-empty-container")
-        .classList.remove("invisible");
-      return;
-    } else {
-      document.getElementById("fav-empty-container").classList.add("invisible");
-    }
-
-    if (favsList.includes(currentBookId)) {
-      toggleHeart(true);
-    }
-
-    allBooksList.forEach((book) => {
-      if (favsList.includes(book.id)) {
-        renderBookItem(book, favBooksList);
-      }
-    });
-  }
-
-  function markFavourite(id, addItem) {
-    var favsList = [];
-    const favs = localStorage.getItem(FAV_BOOKS_KEY);
-
-    if (favs != null) favsList = JSON.parse(favs);
-
-    if (addItem == null) addItem = !favsList.includes(id);
-    if (addItem) favsList.push(id);
-    else {
-      const idx = favsList.indexOf(id);
-      if (idx != -1) favsList.splice(idx, 1);
-    }
-
-    localStorage.setItem(FAV_BOOKS_KEY, JSON.stringify(favsList));
-  }
-
-  // Playlist item click event
-  playlistItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      const audioSource = item.getAttribute("data-src");
-
-      // Check if the file exists before playing
-      if (audioSource) {
-        audioPlayer.src = audioSource;
-
-        // Handle playback errors
-        audioPlayer.play().catch((error) => {
-          console.error("Audio playback error:", error);
-          if (error.name === "NotSupportedError") {
-            showErrorPopup(
-              "Failed to play audio. Unsupported format or file missing."
-            );
-          } else {
-            showErrorPopup(
-              "Failed to play audio. There was an issue with playback."
-            );
-          }
-        });
-      } else {
-        showErrorPopup("Audio source not available.");
-      }
-    });
-  });
-
-  function toggleHeart(activate) {
-    if (activate == null)
-      activate = favouriteButton.classList.contains("bi-heart");
-
-    if (activate) {
-      favouriteButton.classList.remove("bi-heart");
-      favouriteButton.classList.add("bi-heart-fill");
-    } else {
-      favouriteButton.classList.add("bi-heart");
-      favouriteButton.classList.remove("bi-heart-fill");
-    }
-
-    return activate;
-  }
-
-  if (favouriteButton) {
-    favouriteButton.addEventListener("click", () => {
-      const activated = toggleHeart();
-      markFavourite(currentBookId);
-      if (activated) {
-        document
-          .getElementById("fav-empty-container")
-          .classList.add("invisible");
-        renderBookItem(currentBook, favBooksList);
-      } else {
-        loadFavourites();
-      }
-    });
-  }
   //cursor smooth
   const circles = document.querySelectorAll(".circle");
   const logo = document.querySelector(".logo"); // Assuming the logo has a class "logo"
@@ -335,112 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   animateCircles(); // Start the circle animation
-
-  //Keyboard Shortcuts buttons
-  document.addEventListener("keydown", function (e) {
-    switch (e.code) {
-      case "Space": // Play / Pause
-        e.preventDefault(); // Prevents page scrolling when Space is pressed
-        if (audioPlayer.paused) {
-          audioPlayer.play();
-        } else {
-          audioPlayer.pause();
-        }
-        break;
-
-      case "ArrowRight": // Jump forward 30 seconds
-        audioPlayer.currentTime += 30;
-        break;
-
-      case "ArrowLeft": // Go back 30 seconds
-        audioPlayer.currentTime -= 30;
-        break;
-
-      case "Equal": // Increase volume
-        if (audioPlayer.volume < 1) {
-          audioPlayer.volume = Math.min(audioPlayer.volume + 0.1, 1);
-        }
-        break;
-
-      case "NumpadAdd": // Augmenter le volume avec le pavé numérique
-        if (audioPlayer.volume < 1) {
-          audioPlayer.volume = Math.min(audioPlayer.volume + 0.1, 1);
-        }
-        break;
-
-      case "Minus": // Reduce volume
-        if (audioPlayer.volume > 0) {
-          audioPlayer.volume = Math.max(audioPlayer.volume - 0.1, 0);
-        }
-        break;
-      case "NumpadSubtract": // Diminuer le volume avec le pavé numérique
-        if (audioPlayer.volume > 0) {
-          audioPlayer.volume = Math.max(audioPlayer.volume - 0.1, 0);
-        }
-        break;
-
-      default:
-        break;
-    }
-  });
-
-  //Audio player Controls Buttons
-  if (ctrlPlay && audioPlayer) {
-    ctrlPlay.addEventListener("click", function () {
-      if (audioPlayer.paused) {
-        audioPlayer.play();
-        ctrlPlay.innerHTML = '<i class="bi bi-play-fill"></i>';
-      } else {
-        audioPlayer.pause();
-        ctrlPlay.innerHTML = '<i class="bi bi-pause-fill"></i>';
-      }
-    });
-
-    ctrlFastForward.addEventListener("click", function () {
-      audioPlayer.currentTime += 30;
-    });
-
-    ctrlFastBackward.addEventListener("click", function () {
-      audioPlayer.currentTime -= 30;
-    });
-    volumeUp.addEventListener("click", function () {
-      if (audioPlayer.volume < 1) {
-        audioPlayer.volume = Math.max(audioPlayer.volume + 0.1, 0);
-      }
-    });
-    volumeDown.addEventListener("click", function () {
-      if (audioPlayer.volume > 0) {
-        audioPlayer.volume = Math.max(audioPlayer.volume - 0.1, 0);
-      }
-    });
-
-    // Seek Player
-    audioPlayer.addEventListener("timeupdate", () => {
-      seekSlider.value = audioPlayer.currentTime;
-      currentTimeLabel.textContent = formatTime(audioPlayer.currentTime);
-    });
-    // Seek functionality
-    seekSlider.addEventListener("input", (event) => {
-      audioPlayer.currentTime = event.target.value;
-    });
-
-    // Format time from seconds to MM:SS
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secondsLeft = Math.floor(seconds % 60);
-      return `${minutes}:${secondsLeft < 10 ? "0" : ""}${secondsLeft}`;
-    }
-
-    audioPlayer.addEventListener("ended", function () {
-      ctrlPlay.innerHTML = '<i class="bi bi-play-fill"></i>';
-    });
-
-    // Update the seek slider and current time
-    audioPlayer.addEventListener("loadedmetadata", () => {
-      durationLabel.textContent = formatTime(audioPlayer.duration);
-      seekSlider.max = audioPlayer.duration;
-    });
-  }
 
   // Comment Submission
   if (commentForm) {
@@ -526,32 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // progress bars
-
-  function initializeProgressBars() {
-    progressBars?.forEach((progressBar, index) => {
-      const dataSrc = playlistItems[index].getAttribute("data-src");
-      let percentage = parseInt(localStorage.getItem(dataSrc)) || 0;
-      progressBar.style.width = percentage + "%";
-      progressBar.textContent = percentage ? percentage + "%" : "";
-    });
-  }
-  initializeProgressBars();
-
-  audioPlayer?.addEventListener("timeupdate", function () {
-    if (audioPlayer.readyState)
-      progressBars?.forEach((progressBar, index) => {
-        const dataSrc = playlistItems[index].getAttribute("data-src");
-        if (audioPlayer.src.includes(dataSrc) && audioPlayer) {
-          let percentage = parseInt(
-            (audioPlayer.currentTime / audioPlayer.duration) * 100
-          );
-          progressBar.style.width = percentage + "%";
-          progressBar.textContent = percentage ? percentage + "%" : "";
-          localStorage.setItem(dataSrc, percentage);
-        }
-      });
-  });
   //faq auto type answer
   const faqBoxes = document.querySelectorAll(".faq-box");
 
@@ -589,16 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     type();
   }
-
-  audioPlayer?.addEventListener("loadeddata", function () {
-    playlistItems?.forEach((item) => {
-      const dataSrc = item.getAttribute("data-src");
-      if (audioPlayer.src.includes(dataSrc)) {
-        let time = parseInt(localStorage.getItem(dataSrc)) || 0;
-        audioPlayer.currentTime = (time * audioPlayer.duration) / 100;
-      }
-    });
-  });
 });
 // Function to load an HTML file into an element
 function loadHTML(file, elementId) {
@@ -670,12 +317,12 @@ document.querySelectorAll(".friend-card").forEach((card) => {
 // auto-type
 var typed = new Typed(".auto-type", {
   strings: [
-    "Play/Pause",
-    "Stop",
-    "Skip Chapters",
-    "Change Speed",
-    "Change Volume",
-    "Change Theme",
+    "Easy upload",
+    "Instant preview",
+    "Customize settings",
+    "Secure payments",
+    "Delivery options",
+    "Track order",
   ],
   typeSpeed: 150,
   backSpeed: 150,
@@ -765,69 +412,6 @@ const toggleTheme = () => {
 // Add event listener for the theme toggle button
 document.getElementById("theme-toggle");
 
-// contributors auto update
-
-async function fetchContributors(repoOwner, repoName) {
-  try {
-    const response = await fetch(
-      `https://api.github.com/repos/${repoOwner}/${repoName}/contributors`
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const contributors = await response.json();
-    return contributors;
-  } catch (error) {
-    console.error("Error fetching contributors:", error);
-  }
-}
-
-function generateContributorsHTML(contributors) {
-  return contributors
-    .map(
-      (contributor) => `
-      <div class="col">
-        <div class="features-card border border-light-subtle rounded-5 p-3 py-4">
-          <div class="card-body text-center">
-            <img
-              src="${contributor.avatar_url}"
-              class="card-img-top rounded-circle mx-auto"
-              style="width: 100px; height: 100px"
-              alt="${contributor.login}"
-            />
-            <div class="card-body mt-3">
-              <h5 class="card-title">${contributor.login}</h5>
-              <p class="card-text">
-                <a href="${contributor.html_url}" target="_blank" class="btn btn-bd-primary btn-sm rounded-4 mt-2">GitHub Profile</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-    )
-    .join("");
-}
-
-async function loadContributors() {
-  const repoOwner = "Ctoic"; // GitHub username or organization
-  const repoName = "Lisbook"; // Repository name
-
-  const contributors = await fetchContributors(repoOwner, repoName);
-
-  if (contributors) {
-    const contributorsHTML = generateContributorsHTML(contributors);
-    document.querySelector(
-      ".row.row-cols-1.row-cols-md-3.row-cols-lg-5.g-4.mt-4.align-items-stretch"
-    ).innerHTML = contributorsHTML;
-  }
-}
-
-// Call the function when the page loads
-document.addEventListener("DOMContentLoaded", loadContributors);
-
 //auto-type contributors
 const titles = [
   "Collaborators",
@@ -886,28 +470,33 @@ const erase = () => {
 document.addEventListener("DOMContentLoaded", () => {
   autoType();
 });
-//contact page
-document
-  .getElementById("contact-form")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const message = document.getElementById("message").value;
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const message = document.getElementById("message").value;
 
-    if (name && email && phone && message) {
-      document.getElementById("success-msg").classList.remove("hidden");
-      setTimeout(
-        () => document.getElementById("success-msg").classList.add("hidden"),
-        5000
-      );
+      if (name && email && phone && message) {
+        document.getElementById("success-msg").classList.remove("hidden");
+        setTimeout(
+          () => document.getElementById("success-msg").classList.add("hidden"),
+          5000
+        );
 
-      // Reset form after submission
-      this.reset();
-    }
-  });
+        // Reset form after submission
+        this.reset();
+      }
+    });
+  } else {
+    console.error("The contact-form element is missing.");
+  }
+});
+
 function validateForm() {
   const documentUpload = document.getElementById("documentUpload");
   const quantity = document.getElementById("quantity");
@@ -924,61 +513,66 @@ function validateForm() {
 
   return true;
 }
-document.getElementById("locateButton").addEventListener("click", () => {
-  const map = L.map("map").setView([0, 0], 13); // Default view
+const locateButton = document.getElementById("locateButton");
+if (locateButton) {
+  locateButton.addEventListener("click", () => {
+    const map = L.map("map").setView([0, 0], 13); // Default view
 
-  // Add the OpenStreetMap tiles
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+    // Add the OpenStreetMap tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-  // Locate the user
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const userLocation = [
-          position.coords.latitude,
-          position.coords.longitude,
-        ];
-        map.setView(userLocation, 15); // Center map on user's location
+    // Locate the user
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLocation = [
+            position.coords.latitude,
+            position.coords.longitude,
+          ];
+          map.setView(userLocation, 15); // Center map on user's location
 
-        // Add a marker for the user
-        L.marker(userLocation)
-          .addTo(map)
-          .bindPopup("Your Location")
-          .openPopup();
+          // Add a marker for the user
+          L.marker(userLocation)
+            .addTo(map)
+            .bindPopup("Your Location")
+            .openPopup();
 
-        // Simulate nearby shops
-        const shops = [
-          {
-            lat: userLocation[0] + 0.01,
-            lng: userLocation[1] + 0.01,
-            name: "Shop A",
-          },
-          {
-            lat: userLocation[0] - 0.01,
-            lng: userLocation[1] - 0.01,
-            name: "Shop B",
-          },
-          {
-            lat: userLocation[0] + 0.02,
-            lng: userLocation[1] - 0.02,
-            name: "Shop C",
-          },
-        ];
+          // Simulate nearby shops
+          const shops = [
+            {
+              lat: userLocation[0] + 0.01,
+              lng: userLocation[1] + 0.01,
+              name: "Shop A",
+            },
+            {
+              lat: userLocation[0] - 0.01,
+              lng: userLocation[1] - 0.01,
+              name: "Shop B",
+            },
+            {
+              lat: userLocation[0] + 0.02,
+              lng: userLocation[1] - 0.02,
+              name: "Shop C",
+            },
+          ];
 
-        // Add markers for the shops
-        shops.forEach((shop) => {
-          L.marker([shop.lat, shop.lng]).addTo(map).bindPopup(shop.name);
-        });
-      },
-      (error) => {
-        alert("Unable to retrieve your location.");
-      }
-    );
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-});
+          // Add markers for the shops
+          shops.forEach((shop) => {
+            L.marker([shop.lat, shop.lng]).addTo(map).bindPopup(shop.name);
+          });
+        },
+        (error) => {
+          alert("Unable to retrieve your location.");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  });
+} else {
+  console.error('Element with ID "locateButton" not found in the DOM.');
+}
