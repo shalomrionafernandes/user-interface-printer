@@ -1,158 +1,21 @@
 :root {
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Customize your shadow here */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   --transition-transform: transform 0.6s ease-in-out 0.1s;
   --transition-background: background-color 0.6s ease-in-out 0.1s;
-  --primary-color: #8bcb94; /* Starting shade */
-  --secondary-color: #4e7e46; /* Mid-tone green */
-  --highlight-color: #c2dfbc; /* Light highlight */
-  --dark-accent-color: #0d4e10; /* Deep green */
+  --primary-color: #8bcb94;
+  --secondary-color: #4e7e46;
+  --highlight-color: #c2dfbc;
+  --dark-accent-color: #0d4e10;
   --small: 35px;
   --medium: 50px;
   --large: 65px;
   --bar-height: 10px;
 }
-/* colors used 
-const colors = [
-  "#8bcb94",
-  "#84c78f",
-  "#7cc28a",
-  "#74be86",
-  "#6cb982",
-  "#64a46c",
-  "#5d9e67",
-  "#558962",
-  "#4e925d",
-  "#4e8d57",
-  "#4e8851",
-  "#4e834c",
-  "#4e7e46",
-  "#448444",
-  "#447c4c",
-  "#649c6c",
-  "#74a478",
-  "#b5d2ac",
-  "#c2dfbc",
-  "#e0e9cd",
-  "#d6e4c6",
-  "#cce0c0",
-  "#0d4e10",
-];
 
-
-
-*/
 * {
   margin: 0;
-}
-
-/* Loader Styles */
-#loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white; /* Fond blanc pour masquer le contenu */
-  z-index: 9999; /* S'assurer que le loader est au-dessus de tout */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Spinner size */
-/* .spinner-border {
-  width: 4rem;
-  height: 4rem;
-  color: #1db954;
-} */
-
-/* Spinner container */
-
-.spinner-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-/* Hide the default cursor */
-body,
-a,
-button,
-li {
-  cursor: none;
-}
-.hidden {
-  display: none;
-}
-
-.faq-answer {
-  display: block;
-  font-size: 1rem;
-  margin-top: 10px;
-  color: var(--accent-color); /* Existing accent color */
-}
-
-.faq-question {
-  cursor: pointer;
-  color: var(--accent-color); /* Same color for consistency */
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.faq-question:hover {
-  text-decoration: none;
-}
-
-/* Trailing circles styles */
-.circle {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%; /* Creates a circle */
-  position: fixed; /* Fixed position for the circles */
-  pointer-events: none; /* Makes circles unclickable */
-  z-index: 9999; /* Ensure it stays on top of other elements */
-  background-color: transparent; /* Default color; overridden by JS */
-
-  opacity: 0.5; /* Slightly transparent */
-  transition: transform 0.1s ease-out, left 0.15s, top 0.15s; /* Smooth transition */
-}
-
-/* Scale effect on hover for buttons and list items */
-li:hover .circle,
-button:hover .circle {
-  transform: scale(6); /* Scale the circle on hover */
-}
-
-/* Custom hover effect for buttons */
-button:hover .circle {
-  background-color: #ff4081; /* Neon color when hovering over buttons */
-}
-
-/* Hover effect for list items */
-li:hover {
-  background-color: #e0e0e0; /* Change background color on hover */
-}
-
-/* Hide the spinner once the page is loaded */
-#loader.hidden {
-  display: none;
-}
-
-.language-selector {
-  margin: 20px;
-}
-
-.language-selector select {
-  padding: 10px;
-  font-size: 10px;
-  border-radius: 7px;
-  font-weight: 500;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -168,28 +31,92 @@ body.dark-theme {
   background-color: #121212;
   color: #b3b3b3;
 }
-body.dark-theme .playlist-card {
-  background-color: #121212;
-  color: #b3b3b3;
+
+.hidden {
+  display: none;
+}
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  background-color: transparent;
+  opacity: 0.5;
+  transition: transform 0.1s ease-out, left 0.15s, top 0.15s;
+}
+
+li:hover .circle,
+button:hover .circle {
+  transform: scale(6);
+}
+
+button:hover .circle {
+  background-color: #ff4081;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+}
+
+#loader.hidden {
+  display: none;
+}
+
+.language-selector {
+  margin: 20px;
+}
+
+.language-selector select {
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 7px;
+  font-weight: 500;
 }
 
 ::-webkit-scrollbar {
   width: 7px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: lightgrey;
   border-radius: 4px;
 }
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
   background: gray;
   cursor: pointer;
   border-radius: 8px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-background-color);
 }
@@ -219,7 +146,6 @@ h3 {
 }
 
 #audio-player {
-  /* background-color: #282828; */
   color: var(--accent-color);
   appearance: none;
 }
@@ -239,8 +165,9 @@ button:hover {
 .btn-bd-primary {
   color: var(--accent-color) !important;
   background-color: transparent !important;
-  border: 1px solid var(--accent -color) !important;
+  border: 1px solid var(--accent-color) !important;
 }
+
 .btn-bd-primary:hover {
   color: #191414 !important;
   background-color: var(--accent-background-color) !important;
@@ -250,6 +177,7 @@ footer.light-theme {
   background-color: inherit;
   color: #181818;
 }
+
 footer.dark-theme {
   background-color: inherit;
   color: #f6f6f6;
@@ -263,12 +191,12 @@ footer a:hover {
   color: var(--accent-color) !important;
 }
 
-/* About page  */
 body.dark-theme section {
   width: 100%;
   background-color: #181818;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 body.light-theme section {
   background-color: #ffffff;
 }
@@ -292,8 +220,6 @@ body.light-theme section {
   overflow: hidden;
 }
 
-/*  about page end */
-
 .book-card {
   background-color: #181818;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -304,7 +230,6 @@ body.light-theme section {
 }
 
 .bi {
-  /* cursor: pointer; */
   transition: var(--transition-transform);
   will-change: transform;
   color: var(--accent-color);
@@ -315,14 +240,17 @@ body.light-theme section {
   transform: scale(1.2);
   color: #1db954;
 }
+
 body.dark-theme .playlist-card {
   width: 100%;
   background-color: #181818;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 body.light-theme .playlist-card {
   background-color: inherit;
 }
+
 .playlist-card:hover {
   box-shadow: var(--shadow);
 }
@@ -365,14 +293,12 @@ body.light-theme .playlist-card {
   background-color: #e0e0e0;
 }
 
-/* Play/Pause button animation */
 .play-pause-button {
   display: inline-block;
   width: 50px;
   height: 50px;
   background-color: #1db954;
   border-radius: 50%;
-  /* cursor: pointer; */
   position: relative;
   transition: background-color 0.3s;
 }
@@ -420,7 +346,7 @@ body.light-theme .playlist-card {
   padding: 4px;
   color: white;
   z-index: 1;
-  transition: opactiy 2s;
+  transition: opacity 2s;
   text-decoration: none;
   font-style: normal;
 }
@@ -473,7 +399,6 @@ body.light-theme .playlist-card {
 
 .player {
   position: relative;
-  /* background-color: white; */
 }
 
 .player audio {
@@ -491,22 +416,17 @@ audio {
 }
 
 #audio-book-list-item {
-  /* cursor: pointer; */
   list-style: none;
 }
 
-/* Controls Buttons */
-
 .ctrl-player .ctrl-buttons {
-  /* position: absolute;
-  bottom: 0px; */
-  /* border-top: 1px solid #ddd; */
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .ctrl-player .ctrl-buttons .ctrl-button {
   border: 1px solid #ddd;
   border-radius: 50%;
@@ -515,23 +435,27 @@ audio {
   color: var(--accent-color);
   cursor: pointer;
 }
+
 .ctrl-player .ctrl-buttons .ctrl-button-small {
   width: var(--small);
   height: var(--small);
   line-height: var(--small);
 }
+
 .ctrl-player .ctrl-buttons .ctrl-button-medium {
   width: var(--medium);
   height: var(--medium);
   line-height: var(--medium);
   font-size: 1rem;
 }
+
 .ctrl-player .ctrl-buttons .ctrl-button-large {
   width: var(--large);
   height: var(--large);
   line-height: var(--large);
   font-size: 35px;
 }
+
 .ctrl-player .ctrl-buttons .ctrl-button-small:hover,
 .ctrl-player .ctrl-buttons .ctrl-button-medium:hover,
 .ctrl-player .ctrl-buttons .ctrl-button-large:hover {
@@ -549,7 +473,6 @@ audio {
   font-size: 2.5rem;
 }
 
-/* Base styles for the slider */
 input[type="range"]#seekSlider {
   width: 80%;
   max-width: 400px;
@@ -558,7 +481,6 @@ input[type="range"]#seekSlider {
   background: transparent;
 }
 
-/* Slider track (the line behind the thumb) */
 input[type="range"]#seekSlider::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
@@ -582,23 +504,22 @@ input[type="range"]#seekSlider::-ms-track {
   color: transparent;
 }
 
-/* Slider thumb (the draggable part) */
 input[type="range"]#seekSlider::-webkit-slider-thumb {
   appearance: none;
   width: 15px;
   height: 15px;
-  background: white; /* Thumb color */
-  border: 2px solid var(--accent-background-color); /* Border around the thumb */
+  background: white;
+  border: 2px solid var(--accent-background-color);
   border-radius: 50%;
   cursor: pointer;
-  margin-top: -5px; /* Center the thumb */
+  margin-top: -5px;
 }
 
 input[type="range"]#seekSlider::-moz-range-thumb {
   width: 15px;
   height: 15px;
-  background: white; /* Thumb color */
-  border: 2px solid var(--accent-background-color); /* Border around the thumb */
+  background: white;
+  border: 2px solid var(--accent-background-color);
   border-radius: 50%;
   cursor: pointer;
 }
@@ -606,13 +527,12 @@ input[type="range"]#seekSlider::-moz-range-thumb {
 input[type="range"]#seekSlider::-ms-thumb {
   width: 15px;
   height: 15px;
-  background: white; /* Thumb color */
-  border: 2px solid var(--accent-background-color); /* Border around the thumb */
+  background: white;
+  border: 2px solid var(--accent-background-color);
   border-radius: 50%;
   cursor: pointer;
 }
 
-/* Active (hover or drag) state */
 input[type="range"]#seekSlider:hover::-webkit-slider-thumb {
   background: #e6f2e6;
 }
@@ -630,48 +550,42 @@ input[type="range"]#seekSlider:hover::-ms-thumb {
   height: 12px;
 }
 
-/* for the FAQ section */
-/* Add space between FAQ boxes */
-/* Light Theme */
 .light-theme .faq-box {
-  margin-bottom: 20px; /* Space between boxes */
-  background-color: #fafafa; /* Light background for the FAQ box */
+  margin-bottom: 20px;
+  background-color: #fafafa;
 }
 
 .light-theme .faq {
-  background-color: #ededed; /* Light gray background for the outer container */
-  border: 1px solid #ededed; /* Optional: Add a border for better distinction */
+  background-color: #ededed;
+  border: 1px solid #ededed;
 }
 
-/* Dark Theme */
 .dark-theme .faq-box {
-  margin-bottom: 20px; /* Space between boxes */
-  background-color: #101010; /* Dark background for the FAQ box */
+  margin-bottom: 20px;
+  background-color: #101010;
 }
 
 .dark-theme .faq {
-  background-color: #010101; /* Darker gray background for the outer container */
-  border: 1px solid #010101; /* Optional: Add a border for better distinction */
+  background-color: #010101;
+  border: 1px solid #010101;
 }
 
-/* Optional: Additional styles for text color */
 .light-theme .text-green-500 {
-  color: #1db954; /* Green text color in light theme */
+  color: #1db954;
 }
 
 .dark-theme .text-green-500 {
-  color: #a5d6a7; /* Softer green text color in dark theme */
+  color: #a5d6a7;
 }
 
 .light-theme .text-gray-300 {
-  color: #333; /* Darker text color in light theme */
+  color: #333;
 }
 
 .dark-theme .text-gray-300 {
-  color: #ccc; /* Lighter text color in dark theme */
+  color: #ccc;
 }
 
-/* Profile image size */
 .faq-profile {
   width: 60px;
   height: 60px;
@@ -679,41 +593,36 @@ input[type="range"]#seekSlider:hover::-ms-thumb {
   object-fit: cover;
 }
 
-/* Add hover effect to FAQ cards */
 .faq-box:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
-}
-/* theme toggle button */
-/* Button styles */
-#theme-toggle {
-  background-color: transparent; /* Make the button background transparent */
-  border: none; /* Remove any borders */
-  /* cursor: pointer; Show a pointer cursor on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Change the color of the icon on hover */
+#theme-toggle {
+  background-color: transparent;
+  border: none;
+}
+
 #theme-toggle:hover #moon-icon,
 #theme-toggle:hover #sun-icon {
-  color: #1db954; /* Change to green on hover */
+  color: #1db954;
 }
 
-/* Hide the moon icon in the light theme and vice versa */
 .dark-theme #moon-icon {
-  display: none; /* Hide moon icon in dark theme */
+  display: none;
 }
 
 .dark-theme #sun-icon {
-  display: block; /* Show sun icon in dark theme */
+  display: block;
 }
 
 .light-theme #moon-icon {
-  display: block; /* Show moon icon in light theme */
+  display: block;
 }
 
 .light-theme #sun-icon {
-  display: none; /* Hide sun icon in light theme */
+  display: none;
 }
 
 .profile-section {
@@ -734,158 +643,153 @@ input[type="range"]#seekSlider:hover::-ms-thumb {
   padding: 15px;
   border-radius: 8px;
 }
+
 .container {
-  max-width: 1200px; /* or any width you prefer */
-  margin: 0 auto; /* centers the container */
-  padding: 0 1rem; /* optional padding */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
+
 .logo-text {
-  margin-right: auto; /* push logo to the left */
+  margin-right: auto;
 }
 
 .text-gray-300 {
-  margin: 0 1rem; /* adjust horizontal space between links */
+  margin: 0 1rem;
 }
 
 #menu {
-  margin-top: 1rem; /* if needed to create space above the menu */
+  margin-top: 1rem;
 }
+
 @media (max-width: 1024px) {
   header {
-    padding: 8px; /* Adjust padding for smaller screens */
-    max-height: 50px; /* Optional: reduce max height */
+    padding: 8px;
+    max-height: 50px;
   }
 
   header .container {
-    height: auto; /* Allow height to be auto, but control the max height */
+    height: auto;
   }
 
-  /* Additional styles for the menu icon */
   .menu-icon {
-    display: block; /* Show menu icon */
-    /* Add styles for menu icon */
+    display: block;
   }
 }
 
 @media (max-width: 768px) {
 }
+
 #menu {
   display: flex;
-  align-items: center; /* vertically center items */
+  align-items: center;
 }
 
 .text-gray-300 {
-  margin-right: 1rem; /* space between menu items */
+  margin-right: 1rem;
 }
 
 #theme-toggle,
 #profile-btn {
-  margin-left: 1rem; /* space between buttons and menu items */
+  margin-left: 1rem;
 }
 
-/* Profile button icon */
 #profile-btn i {
-  transition: color 0.3s ease; /* Smooth color transition */
+  transition: color 0.3s ease;
 }
 
-/* Hover effect on profile icon only */
 #profile-btn:hover i {
-  color: #1db954; /* Change to green on hover */
+  color: #1db954;
 }
 
-/* Ensure the button itself does not change color */
 #profile-btn {
-  background-color: transparent; /* Keep button background transparent */
-  border: none; /* No border for the button */
-  /* cursor: pointer; Show pointer on hover */
+  background-color: transparent;
+  border: none;
 }
 
-/* Other existing styles */
 .text-gray-300 {
   color: #d1d1d1;
 }
-/*menu section theme */
-/* Default header background (dark theme) */
+
 header {
   position: fixed;
-  max-height: 120px; /* Set a maximum height */
-
+  max-height: 120px;
   width: 100%;
   top: 0;
   z-index: 1000;
-  background-color: #1a1a1a; /* Ensures the header is fixed at the top */
+  background-color: #1a1a1a;
   padding: 10px 0;
 }
 
 #menu {
-  background-color: inherit; /* Menu should inherit the header's background color */
-}
-/* Make sure the body doesn't hide underneath the fixed header */
-body {
-  margin-top: 80px; /* Adjust this margin to match the height of the header */
+  background-color: inherit;
 }
 
-/* Light theme adjustments */
+body {
+  margin-top: 80px;
+}
+
 body.light-theme header {
-  background-color: #333333; /* Darker gray for light theme */
+  background-color: #333333;
 }
 
 body.light-theme #menu {
-  background-color: inherit; /* Inherit light theme header background */
+  background-color: inherit;
 }
 
-/* Dark theme adjustments */
 body.dark-theme header {
-  background-color: #1a1a1a; /* Dark theme header */
+  background-color: #1a1a1a;
 }
 
 body.dark-theme #menu {
-  background-color: inherit; /* Inherit dark theme header background */
+  background-color: inherit;
 }
-/* Optional hover effects */
+
 a.text-gray-300:hover {
-  color: #1db954; /* Green highlight on hover */
+  color: #1db954;
 }
-/* Header & Menu */
+
 header {
   background-color: #1a1a1a;
 }
+
 header .container {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center items vertically */
-  height: 60px; /* Fixed height */
+  align-items: center;
+  height: 60px;
 }
+
 #menu {
   background-color: inherit;
   position: relative;
 }
-/* Adjusting the layout */
+
 .profile-and-friends {
   display: flex;
   justify-content: space-between;
-  align-items: stretch; /* Ensures both sections have the same height */
+  align-items: stretch;
   padding-top: 80px;
 }
 
 .profile-section,
 .friends-section {
-  flex: 1; /* Both sections will take equal space */
+  flex: 1;
   background-color: inherit;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 30px;
   transition: transform 0.3s ease-in-out;
   display: flex;
-  flex-direction: column; /* Ensures content inside can expand vertically */
+  flex-direction: column;
 }
+
 .dark-theme .friends-section,
 .profile-section {
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
-/* Optional hover effect for both sections */
 .profile-section:hover,
 .friends-section:hover {
   transform: scale(1.02);
@@ -896,52 +800,53 @@ header .container {
 }
 
 #profile-pic {
-  /* cursor: pointer; */
   transition: transform 0.3s ease;
 }
 
 #profile-pic:hover {
   transform: rotate(360deg);
 }
+
 #upload-pic {
   background-color: #94d769;
   border: #94d769;
 }
+
 #upload-pic:hover {
   background-color: #1db954;
   border: #1db954;
 }
 
 .friend-card {
-  /* cursor: pointer; */
   transition: all 0.3s ease;
   padding: 15px;
   text-align: center;
-  background-color: inherit; /* Slightly darker background for the cards */
-  border-radius: 12px; /* Smooth rounded corners */
+  background-color: inherit;
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .dark-theme .friend-card {
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 .friend-card:hover {
-  transform: scale(1.05); /* Slightly enlarges the card on hover */
-  background-color: #1db954; /* Changes background color on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deepens the shadow on hover */
-  border-radius: 16px; /* Increases the border-radius on hover */
+  transform: scale(1.05);
+  background-color: #1db954;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
 }
 
 .friend-card img {
-  transition: transform 0.3s ease, border-radius 0.3s ease; /* Smooth transition for image */
-  border-radius: 50%; /* Ensures profile image is rounded */
+  transition: transform 0.3s ease, border-radius 0.3s ease;
+  border-radius: 50%;
 }
 
 .friend-card:hover img {
-  transform: scale(1.1); /* Enlarges the profile picture slightly on hover */
-  border-radius: 50%; /* Keeps profile image round on hover */
+  transform: scale(1.1);
+  border-radius: 50%;
 }
 
 .friend-card .card-title {
@@ -954,17 +859,17 @@ header .container {
 }
 
 .friend-card:hover .card-text a {
-  color: #121212; /* Changes text color to black when hovered */
+  color: #121212;
 }
 
 .friend-card .card-text a.btn {
-  background-color: #ffffff; /* Default button color */
-  color: #121212; /* Button text color */
+  background-color: #ffffff;
+  color: #121212;
 }
 
 .friend-card:hover .card-text a.btn {
-  background-color: inherit; /* Changes button color on hover */
-  color: #ffffff; /* Button text color on hover */
+  background-color: inherit;
+  color: #ffffff;
 }
 
 .friend-card.collapsed:hover {
@@ -985,7 +890,6 @@ header .container {
   display: block;
 }
 
-/* Button Styles */
 .btn-primary {
   background-color: #1db954;
   border-color: #1db954;
@@ -994,85 +898,76 @@ header .container {
 .btn-primary:hover {
   background-color: #1db700;
 }
-/* footre things */
-/* General Footer Styles */
+
 .footer-col-title {
-  color: #333; /* Darker text for titles */
-  font-size: 1.25rem; /* Larger font for section titles */
-  text-transform: uppercase; /* Uppercase for titles */
-  margin-bottom: 1rem; /* Space below titles */
+  color: #333;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .nav {
-  padding-left: 0; /* Remove default padding */
+  padding-left: 0;
 }
 
-/* Link Styles */
 .nav a {
-  color: #555; /* Gray color for links */
-  text-decoration: none; /* Remove underline */
-  padding: 0.5rem 0; /* Space around links */
-  font-weight: 500; /* Medium font weight for links */
-  transition: color 0.3s ease; /* Smooth transition */
+  color: #555;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-/* Hover Effect for Links */
 .nav a:hover {
-  color: #28a745; /* Change to green on hover (adjust this value to match your site's green) */
+  color: #28a745;
 }
 
-/* Button Styles */
 .nav a.button {
-  display: inline-block; /* Allow for padding */
-  background-color: transparent; /* Transparent background for buttons */
-  color: #555; /* Gray color for button text */
-  border: none; /* Remove default border */
-  border-radius: 25px; /* Rounded corners */
-  padding: 0.5rem 1rem; /* Padding for the button */
-  text-align: center; /* Center the text */
-  text-decoration: none; /* Remove underline */
-  font-weight: bold; /* Bold font for buttons */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  display: inline-block;
+  background-color: transparent;
+  color: #555;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover Effect for Buttons */
 .nav a.button:hover {
-  color: #28a745; /* Change to green on hover */
+  color: #28a745;
 }
 
-/* Icon Styles */
 .nav i {
-  color: #555; /* Gray color for icons */
-  transition: color 0.3s ease; /* Smooth transition for icons */
+  color: #555;
+  transition: color 0.3s ease;
 }
 
-/* Hover Effect for Icons */
 .nav a:hover i {
-  color: #28a745; /* Change icon color to green on hover */
+  color: #28a745;
 }
+
 .nav-item:hover {
   background-color: inherit;
 }
-/* auto-type contributors */
+
 #auto-type-title {
-  font-size: 3.111rem; /* Adjust as needed */
-  color: #333; /* Adjust color as needed */
-  height: 2.5rem; /* Set a fixed height, adjust based on font size */
-  overflow: hidden; /* Prevent overflow */
-  line-height: 2.5rem; /* Center text vertically */
+  font-size: 3.111rem;
+  color: #333;
+  height: 2.5rem;
+  overflow: hidden;
+  line-height: 2.5rem;
 }
-/* Contact Section */
+
 h2.display-5 {
   font-size: 2.5rem;
   font-weight: bold;
   letter-spacing: 2px;
   color: #94d769;
-
   padding: 1rem 2rem;
-
-  border-radius: 12px; /* Rounded corners for a smooth look */
-
-  margin: 0 auto 1rem; /* Centered and space below */
+  border-radius: 12px;
+  margin: 0 auto 1rem;
 }
 
 p {
@@ -1083,17 +978,18 @@ p {
   transition: color 0.3s ease-in-out;
   margin-bottom: 2rem;
 }
+
 p:hover {
   color: #94d769;
 }
 
-/* Contact Form */
 form input,
 form textarea {
   transition: all 0.3s ease-in-out;
-  color: black; /* Change input text color to black */
-  background-color: #f9f9f9; /* Light background for input boxes */
+  color: black;
+  background-color: #f9f9f9;
 }
+
 form input:focus,
 form textarea:focus {
   border-color: #1db954;
@@ -1103,23 +999,23 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
+
 button:hover {
   background-color: #1db954;
 }
 
-/* Map */
 .map-container iframe {
   border-radius: 12px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Social Icons */
 .social-icons a {
   font-size: 1.75rem;
   margin: 0 1.5rem;
   transition: color 0.3s ease, transform 0.3s ease;
 }
+
 .social-icons a:hover {
   color: #1db954;
-  transform: scale(1.1); /* Slightly enlarge icons on hover */
+  transform: scale(1.1);
 }
