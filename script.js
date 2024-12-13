@@ -216,3 +216,86 @@ window.addEventListener("load", () => {
     domElements.loader.classList.add("hidden");
   }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const serviceType = document.getElementById("serviceType");
+  const delivery = document.getElementById("delivery");
+  const pickupOptions = document.getElementById("pickupOptions");
+  const deliveryOptions = document.getElementById("deliveryOptions");
+  const timeOptions = document.getElementById("timeOptions");
+  const dateOptions = document.getElementById("dateOptions");
+
+  // Event listener for service type change
+  serviceType.addEventListener("change", function () {
+    pickupOptions.classList.add("hidden");
+    deliveryOptions.classList.add("hidden");
+
+    if (this.value === "pickup") {
+      pickupOptions.classList.remove("hidden");
+    } else if (this.value === "delivery") {
+      deliveryOptions.classList.remove("hidden");
+    }
+  });
+
+  // Event listener for delivery options change
+  delivery.addEventListener("change", function () {
+    timeOptions.classList.add("hidden");
+    dateOptions.classList.add("hidden");
+
+    if (this.value === "same-day" || this.value === "tomorrow") {
+      timeOptions.classList.remove("hidden");
+    } else if (this.value === "other-day") {
+      dateOptions.classList.remove("hidden");
+      // Show time options after selecting a date
+      document.getElementById("date").addEventListener("change", function () {
+        timeOptions.classList.remove("hidden");
+      });
+    }
+  });
+}); //login js part
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    // Check for specific user credentials
+    if (
+      (email === "thilaks195@gmail.com" || email === "shalomriona@gmail.com") &&
+      password === "riothi1621"
+    ) {
+      alert("Login successful!");
+      // Redirect to index page
+      window.location.href = "index.html";
+    } else {
+      alert("Invalid credentials. Please try again.");
+    }
+  });
+
+// Function to display previous prints (to be called on profile page)
+function displayPreviousPrints() {
+  const previousPrints = [
+    { date: "2024-12-01", document: "Document1.pdf" },
+    { date: "2024-12-05", document: "Document2.pdf" },
+  ];
+
+  const printsContainer = document.getElementById("previous-prints");
+  previousPrints.forEach((print) => {
+    const printItem = document.createElement("div");
+    printItem.textContent = `${print.date}: ${print.document}`;
+    printsContainer.appendChild(printItem);
+  });
+}
+
+// Simulate Google login
+document.getElementById("googleLogin").addEventListener("click", function () {
+  alert("Google login is not yet implemented.");
+  // Implement Google login logic here
+});
+
+// Simulate Apple login
+document.getElementById("appleLogin").addEventListener("click", function () {
+  alert("Apple login is not yet implemented.");
+  // Implement Apple login logic here
+});
