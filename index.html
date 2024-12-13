@@ -257,10 +257,25 @@
               class="block w-full border rounded-md py-2 px-3"
             />
           </div>
-
-          <button type="submit" class="btn bg-green-500 text-white px-4 py-2">
-            Find Shops
-          </button>
+          <div class="d-flex justify-content-center mt-4">
+            <input
+              type="number"
+              id="radiusInput"
+              class="radius-input"
+              placeholder="Enter radius in meters"
+            />
+            <button
+              id="locateButton"
+              class="btn bg-blue-500 text-white px-4 py-2"
+            >
+              Locate Nearby Shops
+            </button>
+          </div>
+          <div>
+            <button type="submit" class="btn bg-green-500 text-white px-4 py-2">
+              Find Shops
+            </button>
+          </div>
         </form>
 
         <div id="shopResults" class="mt-5">

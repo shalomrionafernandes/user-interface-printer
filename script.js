@@ -299,3 +299,61 @@ document.getElementById("appleLogin").addEventListener("click", function () {
   alert("Apple login is not yet implemented.");
   // Implement Apple login logic here
 });
+// Initialize the map
+const map = L.map("map").setView([51.505, -0.09], 13); // Default coordinates
+
+// Add OpenStreetMap tiles
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: "© OpenStreetMap",
+}).addTo(map);
+
+// Sample data for shops
+const shops = [
+  { name: "Shop 1", lat: 51.505, lng: -0.09, rating: 4.5, open: true },
+  { name: "Shop 2", lat: 51.515, lng: -0.1, rating: 4.0, open: false },
+  { name: "Shop 3", lat: 51.525, lng: -0.08, rating: 3.5, open: true },
+];
+
+// Function to add shop markers
+function addShopMarkers() {
+  shops.forEach((shop) => {
+    const marker = L.marker([shop.lat, shop.lng]).addTo(map);
+    marker.bindPopup(
+      `<b>${shop.name}</b><br>Rating: ${shop.rating}<br>Status: ${
+        shop.open ? "Open" : "Closed"
+      }`
+    );
+  });
+}
+
+// Add shop markers to the map
+addShopMarkers();
+
+// Function to filter shops by radius
+function filterShopsByRadius(radius) {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      const distance = map.distance(layer.getLatLng(), map.getCenter());
+      if (distance > radius) {
+        map.removeLayer(layer);
+      }
+    }
+  });
+  addShopMarkers(); // Re-add markers to ensure all are displayed initially
+}
+
+// Event listener for radius input (assuming you have an input for radius)
+document.getElementById("radiusInput").addEventListener("change", (event) => {
+  const radius = event.target.value;
+  filterShopsByRadius(radius);
+});
+
+// Function to update map with real-time traffic data (mock implementation)
+function updateTrafficData() {
+  // This would typically involve an API call to a traffic data provider
+  console.log("Updating traffic data...");
+}
+
+// Call updateTrafficData periodically
+setInterval(updateTrafficData, 60000); // Update every minute
