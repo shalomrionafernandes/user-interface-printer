@@ -23,11 +23,7 @@
     <title>Priint it</title>
   </head>
 
-  <body
-    class="dark-theme bg-gray-900 text-gray-300 d-flex flex-column min-vh-100"
-  >
-    
-
+  <body class="text-gray-300 d-flex flex-column min-vh-100">
     <div id="loader" class="spinner-container">
       <div
         class="spinner-border"
@@ -39,184 +35,28 @@
     </div>
 
     <!-- Navbar -->
+    <nav>
+      <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <a class="logo-text h3 font-bold d-inline-flex" href="./index.html">
+          <img
+            src="./logos/page-logo.png"
+            alt="Logo"
+            width="100"
+            height="auto"
+            class="align-text-center me-2"
+          />
+          Priint it
+        </a>
 
-
-<nav class="">
-        <div class="container mx-auto flex justify-between items-center">
-          <!-- Logo -->
-          <a class="logo-text h3 font-bold d-inline-flex" href="./index.html">
-            <img
-              src="./logos/page-logo.png"
-              alt="Logo"
-              width="100"
-              height="auto"
-              class="align-text-center me-2"
-            />
-            Priint it
-          </a>
-
-          <!-- Menu Links and Theme Toggle -->
+        <!-- Menu Links-->
+        <div
+          id="menu"
+          class="fixed inset-0 w-full h-full flex flex-col items-center justify-center space-y-8 transform scale-0 transition-transform duration-300 ease-in-out lg:relative lg:flex lg:items-end lg:justify-end lg:space-y-0 lg:bg-transparent lg:scale-100 lg:flex-row lg:space-x-4 z-20"
+        >
           <div
-            id="menu"
-            class="fixed inset-0 bg-gray-900 w-full h-full flex flex-col items-center justify-center space-y-8 transform scale-0 transition-transform duration-300 ease-in-out lg:relative lg:flex lg:items-end lg:justify-end lg:space-y-0 lg:bg-transparent lg:scale-100 lg:flex-row lg:space-x-4 z-20"
-          >
-            <div
-              id="menu-close"
-              class="text-gray-300 lg:hidden absolute top-5 right-5 cursor-pointer"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </div>
-            <a
-              href="./index.html"
-              class="text-gray-300 hover:text-green-500"
-              id="home"
-              >Home</a
-            >
-            <a
-              href="./about.html"
-              class="text-gray-300 hover:text-green-500"
-              id="about"
-              >About</a
-            >
-
-            <a href="./contact.html" class="text-gray-300 hover:text-green-500"
-              >Contact</a
-            >
-            <a href="./faq.html" class="text-gray-300 hover:text-green-500"
-              >FAQs</a
-            >
-
-            <!-- Profile Icon and Theme Toggle -->
-            <button
-              id="theme-toggle"
-              class="text-gray-300 hover:text-green-500"
-            >
-              <!-- Sun Icon (for dark theme) -->
-              <svg
-                id="sun-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="5"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="12"
-                  y1="1"
-                  x2="12"
-                  y2="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="12"
-                  y1="20"
-                  x2="12"
-                  y2="23"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="4.22"
-                  y1="4.22"
-                  x2="6.34"
-                  y2="6.34"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="17.66"
-                  y1="17.66"
-                  x2="19.78"
-                  y2="19.78"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="1"
-                  y1="12"
-                  x2="4"
-                  y2="12"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="20"
-                  y1="12"
-                  x2="23"
-                  y2="12"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="4.22"
-                  y1="19.78"
-                  x2="6.34"
-                  y2="17.66"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <line
-                  x1="17.66"
-                  y1="6.34"
-                  x2="19.78"
-                  y2="4.22"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-
-              <!-- Moon Icon (for light theme) -->
-              <svg
-                id="moon-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-            </button>
-
-            <a
-              href="./profile.html"
-              class="text-gray-300 hover:text-green-500 me-4"
-            >
-              <i class="bi bi-person-circle h-6 w-6"></i>
-            </a>
-          </div>
-
-          <!-- Mobile Menu Toggle Button -->
-          <div
-            id="menu-toggle"
-            title="Menu"
-            class="text-gray-300 lg:hidden cursor-pointer"
+            id="menu-close"
+            class="text-gray-300 lg:hidden absolute top-5 right-5 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -229,12 +69,60 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M4 6h16M4 12h16m-7 6h7"
+                d="M6 18L18 6M6 6l12 12"
               />
             </svg>
           </div>
+          <a
+            href="./index.html"
+            class="text-gray-300 hover:text-green-500"
+            id="home"
+            >Home</a
+          >
+          <a
+            href="./about.html"
+            class="text-gray-300 hover:text-green-500"
+            id="about"
+            >About</a
+          >
+          <a href="./contact.html" class="text-gray-300 hover:text-green-500"
+            >Contact</a
+          >
+          <a href="./faq.html" class="text-gray-300 hover:text-green-500"
+            >FAQs</a
+          >
+          <a
+            href="./profile.html"
+            class="text-gray-300 hover:text-green-500 me-4"
+          >
+            <i class="bi bi-person-circle h-6 w-6"></i>
+          </a>
         </div>
-      </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div
+          id="menu-toggle"
+          title="Menu"
+          class="text-gray-300 lg:hidden cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </div>
+      </div>
+    </nav>
+
     <main class="container my-5">
       <section class="rounded-5 p-5 my-5 bg-light">
         <h2 class="display-5 page-title fw-semibold text-center">
@@ -326,8 +214,6 @@
       </section>
     </main>
 
- 
-
     <!-- Social Share Modal -->
     <div
       class="modal fade"
@@ -349,47 +235,42 @@
               aria-label="Close"
             ></button>
           </div>
-         <!-- Modal body with personalized links -->
-<div class="modal-body">
-  <div class="flex justify-center space-x-4 mt-4">
-    <!-- Facebook Link -->
-    <a
-      href="https://www.facebook.com/iamthilakjo"
-      target="_blank"
-    >
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-        alt="Facebook Profile"
-        style="width: 24px; height: 24px"
-      />
-    </a>
+          <div class="modal-body">
+            <div class="flex justify-center space-x-4 mt-4">
+              <!-- Facebook Link -->
+              <a href="https://www.facebook.com/iamthilakjo" target="_blank">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                  alt="Facebook Profile"
+                  style="width: 24px; height: 24px"
+                />
+              </a>
 
-    <!-- Twitter (X) Link -->
-    <a
-      href="https://x.com/thilakjo"
-      target="_blank"
-    >
-      <img
-        src="https://abs.twimg.com/favicons/twitter.2.ico"
-        alt="Twitter Profile"
-        style="width: 24px; height: 24px"
-      />
-    </a>
+              <!-- Twitter (X) Link -->
+              <a href="https://x.com/thilakjo" target="_blank">
+                <img
+                  src="https://abs.twimg.com/favicons/twitter.2.ico"
+                  alt="Twitter Profile"
+                  style="width: 24px; height: 24px"
+                />
+              </a>
 
-    <!-- WhatsApp Link -->
-    <a
-      href="https://api.whatsapp.com/send?phone=8660319759"
-      target="_blank"
-    >
-      <img
-        src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_whatsapp-512.png"
-        alt="WhatsApp Contact"
-        style="width: 24px; height: 24px"
-      />
-    </a>
-  </div>
-</div>
-<!-- Social Share Modal end -->
+              <!-- WhatsApp Link -->
+              <a
+                href="https://api.whatsapp.com/send?phone=8660319759"
+                target="_blank"
+              >
+                <img
+                  src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_whatsapp-512.png"
+                  alt="WhatsApp Contact"
+                  style="width: 24px; height: 24px"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Footer -->
     <div id="footer-placeholder" class="mt-auto"></div>
@@ -401,7 +282,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- JavaScript -->
-
     <script src="./script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
